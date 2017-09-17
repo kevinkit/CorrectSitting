@@ -12,7 +12,7 @@ import easygui
 from tqdm import tqdm
 import cv2
 import os
-from time import sleep
+from time import sleep, gmtime, strftime
 correct_directory = 'correct'
 incorrect_directory = 'incorrect'
 easygui.msgbox("Welcome to correct sitting. With this script you are able" + \
@@ -43,7 +43,7 @@ for i in tqdm(range(0,900)):
     cv2.imshow('frame',frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-    cv2.imwrite(correct_directory + '/' + str(i)+ '.png',frame);
+    cv2.imwrite(correct_directory + '/' + str(i)+ strftime("%Y%m%d%H%M%S",gmtime())+ '.png',frame);
     
     #Sleep for 1 Sec so that the person may move a little to prevent overfitting
     sleep(1)
@@ -64,7 +64,7 @@ for i in tqdm(range(0,9000)):
     cv2.imshow('frame',frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-    cv2.imwrite(incorrect_directory + '/' + str(i)+ '.png',frame);
+    cv2.imwrite(incorrect_directory + '/' + str(i)+ strftime("%Y%m%d%H%M%S",gmtime()) + '.png',frame);
     #Sleep for 1 Sec so that the person may move a little to prevent overfitting
     sleep(1)
 # When everything done, release the capture
